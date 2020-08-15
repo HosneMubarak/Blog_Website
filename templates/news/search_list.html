@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    All News
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-12 py-2 border mt-3 ">
+            <h2 class=" font-weight-bold"><span><i class="fas fa-newspaper"></i></span>Search Result:</h2>
+        </div>
+        {% for news in search_list|slice:4 %}
+            <div class="col-md-12 py-3">
+                <div class="card">
+                    {% if news.image1 %}
+                        <img src="{{ news.image1.url }}" alt="" class="card-img"
+                             style="width: 830px; height: 550px;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ news.title }}</h4>
+                        <p class="card-text">{{ news.text|truncatechars:200 }}</p>
+                        <a href="{% url 'list-detail' news.slug %}" class="btn btn-dark">Read More</a>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

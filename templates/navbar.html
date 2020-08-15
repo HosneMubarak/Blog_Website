@@ -1,0 +1,52 @@
+<!--navbar-->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+    <a class="navbar-brand" href="{% url 'list-page' %}">NewsPaper</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse py-3" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'bangladesh-page' %}">BANGLADESH</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'business-page' %}">BUSINESS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'sports-page' %}">SPORTS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'lifestyle-page' %}">LIFESTYLE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'shobiz-page' %}">SHOWBIZ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'technology-page' %}">TECHNOLOGY</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Welcome, {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item " href="{% url 'logout' %}">Logout</a>
+                        <a class="dropdown-item " href="{% url 'password_change' %}">Change Password</a>
+                        <a class="dropdown-item " href="{% url 'password_reset' %}">Password Reset</a>
+                    </div>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="nav-link btn btn-outline-success" href="{% url 'dashboard-page' %}">Dashboard</a>
+                </li>
+            {% else %}
+                <li class="nav-item ml-3">
+                    <a class="nav-link btn btn-outline-success" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

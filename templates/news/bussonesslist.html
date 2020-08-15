@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    All News
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center py-3">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form class="card card-sm" method="get" action="{% url 'search-page' %}">
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search fa-2x"></i>
+                        </div>
+                        <!--end of col-->
+                        <div class="col ml-2">
+                            <input class="form-control form-control-lg form-control-borderless" name="title_q"
+                                   type="text"
+                                   placeholder="Search topics or keywords">
+                        </div>
+                        <!--end of col-->
+                        <div class="col-auto ml-3">
+                            <button class="btn btn-lg btn-success" type="submit">Search</button>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                </form>
+            </div>
+            <!--end of col-->
+        </div>
+        <div class="row">
+
+            <div class="col-md-12 py-2 border mt-3 ">
+                <h4 class="lead font-weight-bold"><span><i class="fas fa-newspaper"></i></span> LATEST NEWS:</h4>
+            </div>
+            {% for news in news_list %}
+                <div class="col-md-6 py-3">
+                    <div class="card">
+                        {% if news.image1 %}
+                            <img src="{{ news.image1.url }}" alt="" class="card-img"
+                                 style="width: 530px; height: 350px;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h4 class="card-title">{{ news.title }}</h4>
+                            <p class="card-text">{{ news.text|truncatechars:200 }}</p>
+                            <a href="{% url 'list-detail' news.slug %}" class="btn btn-dark">Read More</a>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+        <!--Footer-->
+    </div>
+
+{% endblock %}
